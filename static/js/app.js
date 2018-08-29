@@ -35,34 +35,20 @@ function OnSubmit(){
     var Shape = d3.select("#shape").property("value").trim();
     console.log(Shape.toLowerCase())
 
-
-    function Datarange(Case){
-        return(Case.datetime == Date || Case.city == City.toLowerCase() || Case.state == State.toLowerCase()
-              || Case.country == Country.toLowerCase() || Case.shape == Shape.toLowerCase())
-        // return(Case.datetime == Date.trim() || Case.city == City.toLowerCase().trim() || Case.state == State.toLowerCase().trim()
-        // || Case.country == Country.toLowerCase().trim() || Case.shape == Shape.toLowerCase()).trim()      
-        // return(Case.datetime == Date && Case.city == City.toLowerCase() && Case.state == State.toLowerCase()
-        // && Case.country == Country.toLowerCase() && Case.shape == Shape.toLowerCase())
+     function Datarange(Case){
+        // return(Case.datetime == Date || Case.city == City.toLowerCase() || Case.state == State.toLowerCase()
+        //       || Case.country == Country.toLowerCase() || Case.shape == Shape.toLowerCase())
+        return(Case.datetime == Date && Case.city == City.toLowerCase() && Case.state == State.toLowerCase()
+        && Case.country == Country.toLowerCase() && Case.shape == Shape.toLowerCase())
     }
 
     tableData = Data.filter(Datarange)
-    console.log(tableData);
-
-    // // var myTable = document.getElementById("table");
-    // var myTable = d3.select("table")
-    // // myTable.deleteRow(2)
-    // var rowCount = myTable.rows.length
-    // for (var x=rowCount-1; x>0; x--) 
-    // {
-    // myTable.deleteRow(x)
-    // }
-
+    
     var table = d3.select("table")
     var body = d3.select("tbody")
     
     tableData.forEach(datum =>
     {
-        // console.log(datum);
         var row = body.append("tr");
         row.append("td").text(datum.datetime);
         row.append("td").text(datum.city.toUpperCase());
@@ -75,12 +61,9 @@ function OnSubmit(){
 }
 
 function Reset(){
-    d3.select("tbody").html(" ");
-    d3.select("#datetime").property("value"," ")
-    d3.select("#city").property("value"," ")
-    d3.select("#state").property("value"," ")
-    d3.select("#country").property("value"," ")
-    d3.select("#shape").property("value"," ")
-    // d3.select("table").select("tbody").html()  
-    // d3.select("tbody").html() = " "
+    d3.select("#datetime").property("value","").attr("placeholder",'1/11/2011');
+    d3.select("#city").property("value","").attr("placeholder",'BENTON');
+    d3.select("#state").property("value","").attr("placeholder",'AR');
+    d3.select("#country").property("value","").attr("placeholder",'US');
+    d3.select("#shape").property("value","").attr("placeholder",'CIRCLE');
 }
